@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { StoreModule } from "@ngrx/store";
 import { RegisterComponent } from "./components/register/register.component";
+import { authReducer } from "./store/auth-reducer";
 
 const routes: Routes = [
   {
@@ -14,7 +15,11 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [RegisterComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), ReactiveFormsModule, StoreModule],
+  imports: [CommonModule, 
+    RouterModule.forChild(routes), 
+    StoreModule.forFeature('auth', authReducer),
+    ReactiveFormsModule, 
+  ],
   exports: [],
   providers: [],
 })
