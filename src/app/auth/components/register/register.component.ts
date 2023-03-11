@@ -2,8 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { authIsSubmittingSelector } from "../../store/auth-selectors";
+import { authIsSubmittingSelector } from "../../store/auth.selectors";
 import { registerAction } from "../../store/auth.actions";
+import { RegisterRequest } from "../../interfaces/register-request.interface";
 
 @Component({
   selector: 'app-register',
@@ -34,6 +35,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this._store.dispatch(registerAction(this.form.value));
+    const request: RegisterRequest = {
+      user: this.form.value,
+    }
+    this._store.dispatch(registerAction({ request }));
   }
 }
