@@ -5,6 +5,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { BackendErrorMessagesModule } from "../shared/components/backend-error-messages/backend-error-messages.module";
+import { PersistenceService } from "../shared/services/persistence.service";
 import { RegisterComponent } from "./components/register/register.component";
 import { AuthService } from "./services/auth.service";
 import { AuthEffects } from "./store/auth.effects";
@@ -27,6 +28,6 @@ const routes: Routes = [
     BackendErrorMessagesModule,
   ],
   exports: [],
-  providers: [AuthService],
+  providers: [AuthService, PersistenceService],
 })
 export class AuthModule {}
