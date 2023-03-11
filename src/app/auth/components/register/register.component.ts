@@ -2,9 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { authIsSubmittingSelector } from "../../store/auth.selectors";
+import { authBackendErrorsSelector, authIsSubmittingSelector } from "../../store/auth.selectors";
 import { registerAction } from "../../store/auth.actions";
 import { RegisterRequest } from "../../interfaces/register-request.interface";
+import { BackendErrors } from "src/app/shared/interfaces/backend-errors.interface";
 
 @Component({
   selector: 'app-register',
@@ -14,6 +15,7 @@ import { RegisterRequest } from "../../interfaces/register-request.interface";
 export class RegisterComponent implements OnInit {
   form: FormGroup;
   isSubmitting$: Observable<boolean>;
+  backendErrors$: Observable<BackendErrors | null>;
 
   constructor(private _fb: FormBuilder, private _store: Store) {}
 
@@ -32,6 +34,7 @@ export class RegisterComponent implements OnInit {
 
   initializeValues(): void {
     this.isSubmitting$ = this._store.select(authIsSubmittingSelector);
+    this.backendErrors$ = this._store.select(authBackendErrorsSelector);
   }
 
   onSubmit(): void {
