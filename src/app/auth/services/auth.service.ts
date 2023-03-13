@@ -25,6 +25,13 @@ export class AuthService {
     )
   }
 
+  getCurrentUser(): Observable<CurrentUser> {
+    const fullUrl = environment.apiUrl + '/user';
+    return this._http.get(fullUrl).pipe(
+      map(this._getUser)
+    )
+  }
+
   private _getUser(response: AuthResponse): CurrentUser {
     return response.user;
   }

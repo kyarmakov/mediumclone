@@ -3,7 +3,8 @@ import { CurrentUser } from "src/app/shared/interfaces/current-user.interface";
 
 export interface AuthState {
   isSubmitting: boolean;
-  currentUser: CurrentUser | null;
   isLoggedIn: boolean | null;
+  isLoading: boolean;
+  currentUser: CurrentUser | null;
   errors: BackendErrors | null;
 }

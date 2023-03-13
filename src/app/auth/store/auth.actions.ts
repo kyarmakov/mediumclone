@@ -34,3 +34,16 @@ export const loginFailureAction = createAction(
   AuthActionsEnum.LOGIN_FAILURE,
   props<{ errors: BackendErrors }>()
 )
+
+export const getCurrentUserAction = createAction(
+  AuthActionsEnum.GET_CURRENT_USER,
+)
+
+export const getCurrentUserSuccessAction = createAction(
+  AuthActionsEnum.GET_CURRENT_USER_SUCCESS,
+  props<{ currentUser: CurrentUser }>()
+)
+
+export const getCurrentUserFailureAction = createAction(
+  AuthActionsEnum.GET_CURRENT_USER_FAILURE,
+)
