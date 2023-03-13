@@ -17,7 +17,7 @@ export class TopBarComponent implements OnInit {
   constructor(private _store: Store) {}
 
   ngOnInit(): void {
-    this.initializeListeners;
+    this.initializeListeners();
   }
 
   initializeListeners(): void {
