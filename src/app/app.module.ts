@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AuthModule } from './auth/auth.module';
 import { EffectsModule } from '@ngrx/effects';
+import { TopBarModule } from './shared/components/top-bar/top-bar.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EffectsModule } from '@ngrx/effects';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([]),
     HttpClientModule,
+    TopBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

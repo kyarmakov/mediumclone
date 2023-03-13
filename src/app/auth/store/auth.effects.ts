@@ -6,7 +6,7 @@ import { catchError, map, of, switchMap, tap } from "rxjs";
 import { CurrentUser } from "src/app/shared/interfaces/current-user.interface";
 import { PersistenceService } from "src/app/shared/services/persistence.service";
 import { AuthService } from "../services/auth.service";
-import { registerAction, registerFailureAction, registerSuccessAction } from "./auth.actions";
+import { loginAction, loginFailureAction, loginSuccessAction, registerAction, registerFailureAction, registerSuccessAction } from "./auth.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -26,9 +26,24 @@ export class AuthEffects {
     })
   ))
 
+  login$ = createEffect(() => this._actions$.pipe(
+    ofType(loginAction),
+    switchMap(({ request }) => {
+      return this._authService.login(request).pipe(
+        map((currentUser: CurrentUser) => {
+          this._persistanceService.set('accessToken', currentUser.token);
+          return loginSuccessAction({ currentUser });
+        }),
+        catchError((errorResponse: HttpErrorResponse) => {
+          return of(loginFailureAction({ errors: errorResponse.error.errors }));
+        })
+      )
+    })
+  ))
+
   redirectAfterSubmit$ = createEffect(() => {
       return this._actions$.pipe(
-        ofType(registerSuccessAction),
+        ofType(...[registerSuccessAction, loginSuccessAction]),
         tap(() => this._router.navigateByUrl('/'))
       )
     },

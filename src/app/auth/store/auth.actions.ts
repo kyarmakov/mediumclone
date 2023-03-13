@@ -1,6 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 import { BackendErrors } from "src/app/shared/interfaces/backend-errors.interface";
 import { CurrentUser } from "src/app/shared/interfaces/current-user.interface";
+import { LoginRequest } from "../interfaces/login-request.interface";
 import { RegisterRequest } from "../interfaces/register-request.interface";
 import { AuthActionsEnum } from "./auth-actions.enum";
 
@@ -16,5 +17,20 @@ export const registerSuccessAction = createAction(
 
 export const registerFailureAction = createAction(
   AuthActionsEnum.REGISTER_FAILURE,
+  props<{ errors: BackendErrors }>()
+)
+
+export const loginAction = createAction(
+  AuthActionsEnum.LOGIN,
+  props<{ request: LoginRequest }>()
+)
+
+export const loginSuccessAction = createAction(
+  AuthActionsEnum.LOGIN_SUCCESS,
+  props<{ currentUser: CurrentUser }>()
+)
+
+export const loginFailureAction = createAction(
+  AuthActionsEnum.LOGIN_FAILURE,
   props<{ errors: BackendErrors }>()
 )

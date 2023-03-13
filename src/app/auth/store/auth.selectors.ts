@@ -12,3 +12,18 @@ export const authBackendErrorsSelector = createSelector(
   authFeatureSelector,
   (authState: AuthState) => authState.errors
 )
+
+export const authIsLoggedInSelector = createSelector(
+  authFeatureSelector,
+  (authState: AuthState) => authState.isLoggedIn
+)
+
+export const authCurrentUserSelector = createSelector(
+  authFeatureSelector,
+  (authState: AuthState) => authState.currentUser
+)
+
+export const authIsAnonymousSelector = createSelector(
+  authFeatureSelector,
+  (authState: AuthState) => authState.isLoggedIn === false
+)
